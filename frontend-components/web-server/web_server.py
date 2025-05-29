@@ -9,9 +9,9 @@ import datetime
 
 def main(ip_2_connect = "192.168.1.12"):
 
-    os.chdir("/home/debian/SmartHome/web-server/")
+    os.chdir("/home/debian/SmartHome/frontend-components/web-server/")
 
-    app = fsk.Flask("SmartHome", root_path="/home/debian/SmartHome/web-server/")
+    app = fsk.Flask("SmartHome", root_path="/home/debian/SmartHome/frontend-components/web-server/")
     app.secret_key = "nxp12345"
 
     '''
