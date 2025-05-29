@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>SmartHome</title>
+        <link rel="stylesheet" href="../static/room_navigation.css">
+        <link rel="stylesheet" href="../static/lights_menu.css">
+        <link rel="stylesheet" href="../static/temperature.css">
+        <link rel="stylesheet" href="../static/camera.css">
+        <script src="../static/functions.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <span class="room_menu_open" onclick="OpenRoomMenu()">&#9776; Choose a room</span>
+        <p style="color:#fff;font-size: 25px;">You are in Bedroom 1</p>
+        <div id="room_nav" class="room_menu_overlay">
+            <a href="javascript:void(0)" class="room_menu_close" onclick="CloseRoomMenu()">&times;</a>
+            <div class="room_menu_overlay_content">
+                <a href="/livingroom">Livingroom</a>
+                <a href="/bedroom1">Bedroom1</a>
+                <a href="/bedroom2">Bedroom2</a>
+                <a href="/bathroom">Bathroom</a>
+                <a href="/kitchen">Kitchen</a>
+                <a href="/garage">Garage</a>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="set_bulb_div">
+            <br><br>
+            <h1>Lights control</h1><br>
+            <div class="bulb_dropdown">
+                <h2 id="bulb_dropdown_display"> Select bulb </h2>
+                <div class="bulb_dropdown_content">
+                    {% for bulb in bulbs_list %}
+                        <button class="bulb_bttn" onclick="Bulb_Select('{{ bulb }}')">{{ bulb }}</button><br> 
+                    {% endfor %}
+                </div>
+            </div>
+            <br><br>
+            <button class="color_bttn"  id="BulbOff" style="border:5px solid #5343f3; border-radius:25%;" onclick="Bulb_buttonClick('46424f')">Off</button>
+            <br><br>
+            <button class="color_bttn"  style="background-color: #fff;"  onclick="Bulb_buttonClick('ffffff')"></button>
+            <button class="color_bttn"  style="background-color: #f00;"  onclick="Bulb_buttonClick('ff0000')"></button>
+            <button class="color_bttn"  style="background-color: #f80;"  onclick="Bulb_buttonClick('ff8000')"></button>
+            <button class="color_bttn"  style="background-color: #ff0;"  onclick="Bulb_buttonClick('ffff00')"></button>
+            <button class="color_bttn"  style="background-color: #8f0;"  onclick="Bulb_buttonClick('80ff00')"></button>
+            <button class="color_bttn"  style="background-color: #0f0;"  onclick="Bulb_buttonClick('00ff00')"></button>
+            <button class="color_bttn"  style="background-color: #0f8;"  onclick="Bulb_buttonClick('00ff80')"></button>
+            <button class="color_bttn"  style="background-color: #0ff;"  onclick="Bulb_buttonClick('00ffff')"></button>    
+            <button class="color_bttn"  style="background-color: #08f;"  onclick="Bulb_buttonClick('0080ff')"></button>
+            <button class="color_bttn"  style="background-color: #00f;"  onclick="Bulb_buttonClick('0000ff')"></button>
+            <button class="color_bttn"  style="background-color: #80f;"  onclick="Bulb_buttonClick('8000ff')"></button>
+            <button class="color_bttn"  style="background-color: #f0f;"  onclick="Bulb_buttonClick('ff00ff')"></button>
+            <br><br><br>
+        </div>
+
+        <br><br><br>
+
+        <div class="temperature_div">
+            <br><br>
+            <h1>Temperature control</h1><br>
+            <h3>Mode</h3>
+            <button class="ac_bttn" onclick="">auto</button>
+            <button class="ac_bttn" onclick="">cold</button>
+            <button class="ac_bttn" onclick="">hot</button>
+            <button class="ac_bttn" onclick="">dry</button>
+            <br><br>
+            <h3>Temperature</h3>
+            <button class="ac_bttn" style="font-size: 50px;" onclick="">-</button>
+            <button id="temp_display" disabled>20</button>
+            <button class="ac_bttn" style="font-size: 50px;" onclick="">+</button>
+            <br><br>
+            <h3>Fan speed</h3>
+            <input class="fanspeed_slider" type="range" max="10" min="0" onchange="">
+            <br><br>
+        </div>
+
+        <br><br><br>
+
+        <div class="camera_div">
+            <br><br>
+            <h1>Camera</h1><br>
+            <div class="image_div">
+                <img src="{{ url_for('video_feed_bedroom_1') }}" style="width:100%">
+            </div>
+            <br><br>
+        </div>
+    </body>
+</html>

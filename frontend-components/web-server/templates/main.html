@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SmartHome</title>
+        <link rel="stylesheet" href="../static/dark_theme.css">
+        <script src="../static/functions.js"></script>
+    </head>
+    <body>
+
+        <div class="room_dropdown">
+            <h2 id="room_dropdown_display"> Select room </h2>
+            <div class="room_dropdown_content">
+              <button class="room_bttn" id="livingroom_bttn" onclick="GO_Room('Livingroom')">Livingroom</button>
+              <button class="room_bttn" id="bedroom1_bttn"   onclick="GO_Room('Bedroom1')">Bedroom 1</button>
+              <button class="room_bttn" id="bedroom2_bttn"   onclick="GO_Room('Bedroom2')">Bedroom 2</button>
+              <button class="room_bttn" id="bathroom_bttn"   onclick="GO_Room('Bathroom')">Bathroom</button>
+              <button class="room_bttn" id="kitchen_bttn"    onclick="GO_Room('Kitchen')">Kitchen</button>
+              <button class="room_bttn" id="garage_bttn"     onclick="GO_Room('Garage')">Garage</button>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="set_bulb_div">
+            
+            <div class="bulb_dropdown">
+                <h3 id="bulb_dropdown_display"> Select a bulb </h3>
+                
+            </div>
+
+            <button class="square_bttn"  id="BulbOn"        onclick="Bulb_buttonClick('ON')">On</button>
+            <br>
+            <button class="square_bttn"  id="BulbOff"       onclick="Bulb_buttonClick('OFF')">Off</button>
+            <br>    
+            <input  class="color_slider" id="ColorSlider"   oninput="ColorSlider_Set(this.value)" type="range" min="0" max="11"> 
+        </div>
+    </body>
+</html>

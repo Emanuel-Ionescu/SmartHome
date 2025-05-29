@@ -1,0 +1,76 @@
+:root{
+  --background : #1a1626;
+  --elem_background_1: #2f2b3a;
+  --elem_background_2: #46424f;
+  --elem_background_2_rbga : rgba(70, 66, 79, 0.9);
+  --active_1 : #a688fa;
+  --active_2 : #5343f3;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative;
+  background-color: var(--background);
+  color: white;
+  text-align: center;
+}
+
+.room_menu_open{
+  color: var(--active_1);
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.room_menu_overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--elem_background_2_rbga);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.room_menu_overlay_content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.room_menu_overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: var(--active_2);
+  display: block;
+  transition: 0.3s;
+}
+
+.room_menu_overlay a:hover, .overlay a:focus {
+  color: #fff;
+  background-color: var(--active_2);
+}
+
+.room_menu_overlay .room_menu_close {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .room_menu_overlay a {font-size: 20px}
+  .room_menu_overlay .room_menu_close {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+

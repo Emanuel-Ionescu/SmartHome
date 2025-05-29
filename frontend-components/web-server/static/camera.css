@@ -1,0 +1,22 @@
+:root{
+    --background : #1a1626;
+    --elem_background_1: #2f2b3a;
+    --elem_background_2: #46424f;
+    --elem_background_2_rbga : rgba(70, 66, 79, 0.9);
+    --active_1 : #a688fa;
+    --active_2 : #5343f3;
+}
+
+.camera_div{
+    background: var(--elem_background_1);
+    width: 95%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.image_div{
+    margin:auto;
+    width:90%;
+    max-width: 800px;
+    border: 5px solid var(--active_2)
+}

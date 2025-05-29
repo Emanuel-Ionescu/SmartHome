@@ -1,0 +1,12 @@
+:root{
+    --background : #1a1626;
+    --elem_background_1: #2f2b3a;
+    --elem_background_2: #46424f;
+    --active_1 : #a688fa;
+    --active_2 : #5343f3;
+}  
+
+button{
+    border : 4px solid black;
+}
+

@@ -1,0 +1,69 @@
+:root{
+    --background : #1a1626;
+    --elem_background_1: #2f2b3a;
+    --elem_background_2: #46424f;
+    --elem_background_2_rbga : rgba(70, 66, 79, 0.9);
+    --active_1 : #a688fa;
+    --active_2 : #5343f3;
+}
+
+.temperature_div{
+    background: var(--elem_background_1);
+    width: 95%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.ac_bttn{
+    min-height: 70px;
+    min-width: 70px;
+    border: 3px solid var(--active_2);
+    border-radius: 10px;
+    background-color: var(--elem_background_2);
+    color: var(--active_2);
+    text-align: center;
+    font-size: 28px;
+}
+
+#temp_display{
+    min-height: 70px;
+    min-width: 200px;
+    font-size: 50px;
+    background-color: var(--active_1);
+    color:white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.fanspeed_slider {
+    -webkit-appearance: none;
+    width: 60%;
+    height: 25px;
+    background-image: linear-gradient(to right, black , var(--active_1));
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 12px;
+}
+
+.fanspeed_slider:hover {
+    opacity: 1;
+}
+
+.fanspeed_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--active_2);
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.fanspeed_slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--active_2);
+    cursor: pointer;
+}
