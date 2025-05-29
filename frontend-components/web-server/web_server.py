@@ -7,7 +7,7 @@ import time
 import socket
 import datetime
 
-def main(ip_2_connect = "192.168.1.188"):
+def main(ip_2_connect = "192.168.1.12"):
 
     os.chdir("/home/debian/SmartHome/web-server/")
 
@@ -122,8 +122,8 @@ def main(ip_2_connect = "192.168.1.188"):
         }
 
         pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ' \
-                    '! queue ! appsink sync=false rtspsrc location="rtsp://Tapo-Cam-1:nxp12345@192.168.1.201/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ' \
-                    '! queue ! comp. rtspsrc location="rtsp://Tapo-Cam-2:nxp12345@192.168.1.202/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. '
+                    '! queue ! appsink sync=false rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ' \
+                    '! queue ! comp. rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. '
         
 
         cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)

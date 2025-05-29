@@ -110,8 +110,8 @@ def main():
     print("Starting...")
     start_time = time.time()
 
-    ## matter
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI2OTBjOWE4YzZkNzM0NzcxYTI1MjEwNGRmOTVlZDQyZiIsImlhdCI6MTcyNjAxOTIzMSwiZXhwIjoyMDQxMzc5MjMxfQ.GzAwDa2wSxRX9eJPK75soG_iZWTyW-rwnBXOB-dm9cs"
+    ## HomeAssistant
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiMTI2NDY3ZTg4NTA0NzgwODIzNGNmYmNkMjZjZjMxZiIsImlhdCI6MTc0ODE2OTU0NCwiZXhwIjoyMDYzNTI5NTQ0fQ.OLqGLjO6_D8Bkr-XRJbd9ygYjFtKFNi1l00HNY5W5Ec"
     controller = Controller(token)
 
     ## users

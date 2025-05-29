@@ -36,7 +36,7 @@ import utils
 sys.path.insert(1, './web-server')
 import web_server
 
-SERVER_IP = "192.168.1.188"
+SERVER_IP = "192.168.1.12"
 SERVER_PORT = 8080 
 
 web = mpc.Process(target=web_server.main, args=(SERVER_IP,))
