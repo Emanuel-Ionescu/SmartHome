@@ -1,10 +1,10 @@
 #!/bin/sh
 # v 2.0
-# imx93 version
+# server version
 
 # creating file system
 
-mkdir -p /SmartHome-Server/users_data/default_user
+mkdir -p ./users_data/default_user
 
 echo "0000+noadmin" | md5sum   > ./users_data/default_user/.pin
 touch 			                 ./users_data/default_user/.identifier
