@@ -132,8 +132,10 @@ def main():
     frames_queue = mpc.Queue(1)
     result_queue = mpc.Queue(1)
 
-    model = Model()
-    model.setup(use_NPU=True)
+    try:
+        model = Model(False, True)
+    except:
+        model = Model(True, True)
 
     print("ML loaded in {} secs".format(time.time() - start_time))
     print("Opening cameras...")
