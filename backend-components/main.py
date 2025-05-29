@@ -145,8 +145,8 @@ def main():
     squares_2_draw = {}
 
     cam = {}
-    cam["Livingroom"] = Tapo_Camera("192.168.1.202", "Tapo-Cam-2", "nxp12345", "Livingroom")
-    cam["Bedroom1"]   = Tapo_Camera("192.168.1.201", "Tapo-Cam-1", "nxp12345", "Bedroom1")
+    cam["Livingroom"] = Tapo_Camera("192.168.1.22", "TapoCam", "salut123", "Livingroom")
+    cam["Bedroom1"]   = Tapo_Camera("192.168.1.21", "TapoCam", "salut123", "Bedroom1")
 
     # detection subprocess
     detection = mpc.Process(
