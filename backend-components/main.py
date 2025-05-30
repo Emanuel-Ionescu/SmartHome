@@ -137,6 +137,9 @@ def main():
     except:
         model = Model(True, True)
 
+    # warm up the NPU
+    model.find_faces(np.zeros((300, 300, 3), dtype=np.uint8))
+
     print("ML loaded in {} secs".format(time.time() - start_time))
     print("Opening cameras...")
 
