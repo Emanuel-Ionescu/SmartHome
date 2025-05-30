@@ -44,7 +44,7 @@ class Tab(Qwd.QWidget):
         self.timer.start()
 
         qr = qrcode.QRCode(version=1)
-        qr.add_data("http://192.168.1.101:5000")
+        qr.add_data("http://192.168.1.11:5000")
         img = qr.make_image(fill_color=color_table["active-col2"], back_color=color_table["background1"])
         img = ImageQt(img)
         

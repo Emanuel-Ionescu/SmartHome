@@ -21,9 +21,9 @@ class CameraThread(QThread):
         self.debug = False
         self.data = []
         
-        self.pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ' \
-                        '! queue ! appsink sync=false rtspsrc location="rtsp://Tapo-Cam-1:nxp12345@192.168.1.201/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ' \
-                        '! queue ! comp. rtspsrc location="rtsp://Tapo-Cam-2:nxp12345@192.168.1.202/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. '
+        self.pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
+                        'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' \
+                        'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. '
         self.frames = {
             "Bedroom1"   : '',
             "Livingroom" : ''
