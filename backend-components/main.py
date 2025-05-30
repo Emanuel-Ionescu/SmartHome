@@ -192,6 +192,7 @@ def main():
             if ok == False:
                 frame[k] = cam[k].error_frame
             else:
+                cv2.imshow(str(k), frame[k])
                 frames_list.append(frame[k])
 
         ## adding frames to queue for processing
