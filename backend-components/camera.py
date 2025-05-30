@@ -51,7 +51,10 @@ class Tapo_Camera:
         self.manual    = True
         self.debug     = False
         self.MOVE_SENT = 5
-        self.tapo      = Tapo(self.host, self.user, self.password)
+        try:
+            self.tapo      = Tapo(self.host, self.user, self.password)
+        except:
+            self.tapo = None
         self.led       = 0
 
         time.sleep(3) # wait for connection
