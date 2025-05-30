@@ -181,7 +181,7 @@ def __detect_and_process(model, frames_queue, results_queue):
         face = np.array(face, np.int16)
 
         cropped_frame = frame[face[0] : face[2], face[1] : face[3]]
-        mask = model.id_faces(cropped_frame)
+        mask = model.id_face(cropped_frame)
 
         return [original_face, mask, id]
 
