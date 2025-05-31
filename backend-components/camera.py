@@ -45,34 +45,31 @@ class Tapo_Camera:
         self.frame       = None
         self.ok          = False
 
-        self.reading_thread = threading.Thread(target=self._read_on_thread, args=(self.frame_queue,))
-        self.reading_thread.start()
+        # self.reading_thread = threading.Thread(target=self._read_on_thread, args=(self.frame_queue,))
+        # self.reading_thread.start()
 
         self.manual    = True
         self.debug     = False
         self.MOVE_SENT = 5
-        try:
-            self.tapo      = Tapo(self.host, self.user, self.password)
-        except:
-            self.tapo = None
+        self.tapo      = Tapo(self.host, self.user, self.password)
         self.led       = 0
 
         time.sleep(3) # wait for connection
-        self.ok, self.frame = self.read()
+        # self.ok, self.frame = self.read()
 
         self.command_queue = queue.Queue(1)
         self.commands_subprocess = threading.Thread(
             target=self._command_on_thread
         )
 
-        if self.ok is False:
-            print("Cam NOT ok")
-        else:
-            self.width = self.frame.shape[1]
-            self.height = self.frame.shape[0]
-            print("Cam OK")
-            print("Resolution: " + str(self.width) + "x" + str(self.height))
-            self.commands_subprocess.start()
+        # if self.ok is False:
+        #     print("Cam NOT ok")
+        # else:
+        #     self.width = self.frame.shape[1]
+        #     self.height = self.frame.shape[0]
+        #     print("Cam OK")
+        #     print("Resolution: " + str(self.width) + "x" + str(self.height))
+        self.commands_subprocess.start()
 
 
     def _read_on_thread(self, frame_q):

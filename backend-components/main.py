@@ -180,13 +180,24 @@ def main():
 
     print("Loading finished in {} secs".format(time.time() - start_time))
 
+    pipeline =  'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
+                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' \ 
+                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' # Livingroom 22
+
+    video_cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
+
     while True:
 
         ## getting frames from cameras
         frames_list = []
+
+        ok, raw_frame = video_cam.read()
+        frame["Bedroom1"] = raw_frame[0 * 720 : (0 + 1) * 720, :, :]
+        frame["Livingroom"] = raw_frame[1 * 720 : (1 + 1) * 720, :, :]
+
         for k in cam.keys():
 
-            ok, frame[k] = cam[k].read()
+            # ok, frame[k] = cam[k].read()
 
             w, h = frame[k].shape[:2]
             b, g, r = cv2.split(frame[k][w//2 - 50 : w//2 + 50, h//2 - 50 : h//2 + 50])
