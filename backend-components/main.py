@@ -192,6 +192,7 @@ def main():
         frames_list = []
 
         ok, raw_frame = video_cam.read()
+        raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGRA2BGR)
         frame["Bedroom1"] = raw_frame[0 * 720 : (0 + 1) * 720, :, :]
         frame["Livingroom"] = raw_frame[1 * 720 : (1 + 1) * 720, :, :]
 
