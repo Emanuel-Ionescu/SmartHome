@@ -153,6 +153,12 @@ def main():
     cam["Livingroom"] = Tapo_Camera("192.168.1.22", "TapoCam", "salut123", "Livingroom")
     cam["Bedroom1"]   = Tapo_Camera("192.168.1.21", "TapoCam", "salut123", "Bedroom1")
 
+    pipeline =  'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
+                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' \
+                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' # Livingroom 22
+
+    video_cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
+
     # detection subprocess
     detection = mpc.Process(
         target=utils.__detect_and_process, 
@@ -180,11 +186,8 @@ def main():
 
     print("Loading finished in {} secs".format(time.time() - start_time))
 
-    pipeline =  'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
-                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' \
-                'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' # Livingroom 22
 
-    video_cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
+    print("Start while loop")
 
     while True:
 
@@ -192,6 +195,7 @@ def main():
         frames_list = []
 
         ok, raw_frame = video_cam.read()
+        print(ok, raw_frame.shape)
         raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGRA2BGR)
         frame["Bedroom1"] = raw_frame[0 * 720 : (0 + 1) * 720, :, :]
         frame["Livingroom"] = raw_frame[1 * 720 : (1 + 1) * 720, :, :]
