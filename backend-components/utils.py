@@ -192,12 +192,10 @@ def __detect_and_process(model, frames_queue, results_queue):
             continue
 
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
-        print("=> frames recieved")
         results = []
 
         for frame in frames:
 
-            print("\__frame shape", frame.shape)
             res = __process_frame(frame, frame_id)
             if res[0] is None:
                 h = frame.shape[0] # height
@@ -227,5 +225,6 @@ def __detect_and_process(model, frames_queue, results_queue):
             results.append(res)
 
         if not results_queue.full():
+            print("Frame processing results:", results)
             results_queue.put(results)
 

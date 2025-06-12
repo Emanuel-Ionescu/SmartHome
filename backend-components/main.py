@@ -293,7 +293,8 @@ def main():
         
         # getting result from ML models
         if not result_queue.empty():
-            for key, res in zip(cam.keys(), result_queue.get()):
+            result = result_queue.get()
+            for key, res in zip(cam.keys(), result):
                 if not cam[key].manual:
                     cam[key].center_face(res[0])
                 
