@@ -225,6 +225,5 @@ def __detect_and_process(model, frames_queue, results_queue):
             results.append(res)
 
         if not results_queue.full():
-            print("Frame processing results:", results)
             results_queue.put(results)
 
