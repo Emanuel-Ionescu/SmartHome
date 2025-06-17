@@ -316,7 +316,7 @@ def main():
                         mask_count += 1
                         mask_queue.put(res[1])
 
-                        if mask_queue == 128:
+                        if mask_count == 128:
                             addUser.kill()
                             adding_user = False
                             USERS = load_faces()

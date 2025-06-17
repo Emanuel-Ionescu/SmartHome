@@ -69,6 +69,9 @@ class Tapo_Camera:
         #     self.height = self.frame.shape[0]
         #     print("Cam OK")
         #     print("Resolution: " + str(self.width) + "x" + str(self.height))
+
+        self.width = 1280
+        self.height = 720
         self.commands_subprocess.start()
 
 

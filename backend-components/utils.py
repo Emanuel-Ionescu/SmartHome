@@ -214,10 +214,10 @@ def __detect_and_process(model, frames_queue, results_queue):
                 for s in slices:
                     res = __process_frame(s[0], frame_id + i/10)
                     if res[0] is not None:
-                        res[0][0] += s[1][0]
-                        res[0][1] += s[1][1]
-                        res[0][2] += s[1][0]
-                        res[0][3] += s[1][1]
+                        res[0][0] = res[0][0] * 0.5 + s[1][0]
+                        res[0][1] = res[0][1] * 0.5 + s[1][1]
+                        res[0][2] = res[0][2] * 0.5 + s[1][0]
+                        res[0][3] = res[0][3] * 0.5 + s[1][1]
                         break
                     i+=1
 

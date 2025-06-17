@@ -164,7 +164,6 @@ class Model:
             self.info["face_detector"]["output"][3]["index"]
         )[0]
 
-        print(face_scores)
         output = []
         for i in range(int(face_total)):
             if self.valid_face(face_boxes[i]) and face_scores[i] >= DEFAULT_DETECTION_ACCURACY:
