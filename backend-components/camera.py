@@ -26,6 +26,19 @@ DEFAULT_RECOGNITION_ACCURACY = 0.81
 MAX_HISTORY_LEN = 250
 MOVE_SENSIBILITY = 0.2
 
+class Tapo_Dummy():
+
+    def __init__(self):
+        pass
+
+    def moveMotor(self, x, y):
+        pass
+
+    def setLEDEnabled(self, args):
+        pass
+
+
+
 class Tapo_Camera:
 
     def __init__(self, host, user, password, name, quality=2):
@@ -51,7 +64,10 @@ class Tapo_Camera:
         self.manual    = True
         self.debug     = False
         self.MOVE_SENT = 5
-        self.tapo      = Tapo(self.host, self.user, self.password)
+        try:
+            self.tapo      = Tapo(self.host, self.user, self.password)
+        except:
+            self.tapo = Tapo_Dummy()
         self.led       = 0
 
         time.sleep(3) # wait for connection
