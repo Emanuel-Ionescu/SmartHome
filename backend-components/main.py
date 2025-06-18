@@ -111,7 +111,7 @@ def main():
     start_time = time.time()
 
     ## HomeAssistant
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJiMTI2NDY3ZTg4NTA0NzgwODIzNGNmYmNkMjZjZjMxZiIsImlhdCI6MTc0ODE2OTU0NCwiZXhwIjoyMDYzNTI5NTQ0fQ.OLqGLjO6_D8Bkr-XRJbd9ygYjFtKFNi1l00HNY5W5Ec"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxYmRjNGE4NThkOTU0N2U1YWUxOGJiNDBhZDEzMzNlNiIsImlhdCI6MTc1MDI1MTUyOCwiZXhwIjoyMDY1NjExNTI4fQ.9Of3LA8GAuMH-rRyBbSIhNWamHMdX8_07Nmhzba3sEw"
     controller = Controller(token)
 
     ## users
