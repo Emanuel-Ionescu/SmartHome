@@ -58,8 +58,8 @@ class Tapo_Camera:
         self.frame       = None
         self.ok          = False
 
-        # self.reading_thread = threading.Thread(target=self._read_on_thread, args=(self.frame_queue,))
-        # self.reading_thread.start()
+        self.reading_thread = threading.Thread(target=self._read_on_thread, args=(self.frame_queue,))
+        self.reading_thread.start()
 
         self.manual    = True
         self.debug     = False
@@ -78,16 +78,16 @@ class Tapo_Camera:
             target=self._command_on_thread
         )
 
-        # if self.ok is False:
-        #     print("Cam NOT ok")
-        # else:
-        #     self.width = self.frame.shape[1]
-        #     self.height = self.frame.shape[0]
-        #     print("Cam OK")
-        #     print("Resolution: " + str(self.width) + "x" + str(self.height))
+        if self.ok is False:
+            print("Cam NOT ok")
+        else:
+            self.width = self.frame.shape[1]
+            self.height = self.frame.shape[0]
+            print("Cam OK")
+            print("Resolution: " + str(self.width) + "x" + str(self.height))
 
-        self.width = 1280
-        self.height = 720
+        # self.width = 1280
+        # self.height = 720
         self.commands_subprocess.start()
 
 
