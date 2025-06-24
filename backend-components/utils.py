@@ -196,7 +196,7 @@ def __detect_and_process(model, frames_queue, results_queue):
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
         results = []
         
-        print("DETECT SUBPROCESS: Frames Readed", frame[:].shape)
+        print("DETECT SUBPROCESS: Frames Readed", frames[:].shape)
 
         for frame in frames:
         
