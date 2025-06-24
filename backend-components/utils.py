@@ -160,6 +160,7 @@ def __detect_and_process(model, frames_queue, results_queue):
 
 
     def __process_frame(frame, id):
+        print("DETECTION SUBPROCESS:process function start")
         face_info = model.find_faces(frame)
         if face_info is None:
             return (None, None, None)
