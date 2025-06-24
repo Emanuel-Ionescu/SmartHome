@@ -158,6 +158,7 @@ def __detect_and_process(frames_queue, results_queue):
     """
     Add in results queue a tuple of detected face and the generated mask
     """
+    start_time = time.time()
 
     try:
         model = Model(False, True)
