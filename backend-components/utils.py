@@ -154,10 +154,10 @@ def __add_user(username, frames_queue, mask_queue):
     save_face(username, masks)
     
 def __detect_and_process(model, frames_queue, results_queue): 
-    """Add in results queue a tuple of detected face and the generated mask
+    """
+    Add in results queue a tuple of detected face and the generated mask
     """
 
-    print("DETECT SUBPROCESS: Started")
 
     def __process_frame(frame, id):
         face_info = model.find_faces(frame)

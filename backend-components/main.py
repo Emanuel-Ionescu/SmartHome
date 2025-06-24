@@ -192,8 +192,10 @@ def main():
                 frame[k] = cam[k].error_frame
 
         ## adding frames to queue for processing
+        if frames_queue.full():
+            _ = frames_queue.get()
+            
         if not frames_queue.full():
-            print("Appended in frame queue")
             frames_queue.put((frame_id, frames_list))
             frame_id += 1
 
