@@ -132,16 +132,16 @@ def main():
     frames_queue = mpc.Queue(1)
     result_queue = mpc.Queue(1)
 
-    try:
-        model = Model(False, True)
-    except:
-        model = Model(True, True)
+    # try:
+    #     model = Model(False, True)
+    # except:
+    #     model = Model(True, True)
 
-    # warm up the NPU
-    model.find_faces(np.zeros((300, 300, 3), dtype=np.uint8))
-    model.id_face(np.zeros((300, 300, 3), dtype=np.uint8))
+    # # warm up the NPU
+    # model.find_faces(np.zeros((300, 300, 3), dtype=np.uint8))
+    # model.id_face(np.zeros((300, 300, 3), dtype=np.uint8))
 
-    print("ML loaded in {} secs".format(time.time() - start_time))
+    # print("ML loaded in {} secs".format(time.time() - start_time))
     print("Opening cameras...")
 
     ## cameras management
@@ -156,7 +156,8 @@ def main():
     # detection subprocess
     detection = mpc.Process(
         target=utils.__detect_and_process, 
-        args=(model, frames_queue, result_queue)
+        # args=(model, frames_queue, result_queue)
+        args=(frames_queue, result_queue)
         )
     detection.start()
 
@@ -194,7 +195,7 @@ def main():
         ## adding frames to queue for processing
         if frames_queue.full():
             _ = frames_queue.get()
-            
+
         if not frames_queue.full():
             frames_queue.put((frame_id, frames_list))
             frame_id += 1

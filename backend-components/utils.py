@@ -11,6 +11,7 @@ import queue
 import time
 import threading
 
+from model import Model
 
 class Server:
 
@@ -153,17 +154,27 @@ def __add_user(username, frames_queue, mask_queue):
 
     save_face(username, masks)
     
-def __detect_and_process(model, frames_queue, results_queue): 
+def __detect_and_process(frames_queue, results_queue): 
     """
     Add in results queue a tuple of detected face and the generated mask
     """
 
+    try:
+        model = Model(False, True)
+    except:
+        model = Model(True, True)
+
+    # warm up the NPU
+    model.find_faces(np.zeros((300, 300, 3), dtype=np.uint8))
+    model.id_face(np.zeros((300, 300, 3), dtype=np.uint8))
+
+    print("ML loaded in {} secs".format(time.time() - start_time))
+
 
     def __process_frame(frame, id):
-        print("DETECTION SUBPROCESS:process function start")
         face_info = model.find_faces(frame)
         print(face_info)
-        
+
         if face_info is None:       
             return (None, None, None)
         
@@ -198,13 +209,9 @@ def __detect_and_process(model, frames_queue, results_queue):
         
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
         results = []
-        
-        print("DETECT SUBPROCESS: Frames Readed", frames[0].shape, frames[1].shape)
 
         for frame in frames:
-        
             res = __process_frame(frame, frame_id)
-            print("DETECT SUBPROCESS: Initial res:", res)
             if res[0] is None:
                 h = frame.shape[0] # height
                 w = frame.shape[1] # width
