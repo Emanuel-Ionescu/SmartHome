@@ -10,6 +10,7 @@ import socket
 import queue
 import time
 import threading
+import multiprocess as mpc
 
 
 class Server:
@@ -192,11 +193,11 @@ def __detect_and_process(model, frames_queue, results_queue):
         if frames_queue.empty():
             time.sleep(0.1)
             continue
-
-        print("DETECT SUBPROCESS: Frames Readed")
         
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
         results = []
+        
+        print("DETECT SUBPROCESS: Frames Readed")
 
         for frame in frames:
 

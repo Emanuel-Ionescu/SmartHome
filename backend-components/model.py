@@ -165,7 +165,6 @@ class Model:
         )[0]
 
         output = []
-        print(face_scores)
         for i in range(int(face_total)):
             if self.valid_face(face_boxes[i]) and face_scores[i] >= DEFAULT_DETECTION_ACCURACY:
                 output.append( (face_boxes[i], face_scores[i]) )
