@@ -160,6 +160,7 @@ def main():
         args=(frames_queue, result_queue)
         )
     detection.start()
+    
 
     # automation 
     operations = {}
