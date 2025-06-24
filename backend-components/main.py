@@ -146,19 +146,12 @@ def main():
 
     ## cameras management
     frame   = {}
-    light_out = {}
     frame_id = 0
     squares_2_draw = {}
 
     cam = {}
     cam["Livingroom"] = Tapo_Camera("192.168.1.22", "TapoCam", "salut123", "Livingroom")
     cam["Bedroom1"]   = Tapo_Camera("192.168.1.21", "TapoCam", "salut123", "Bedroom1")
-
-    # pipeline =  'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
-    #             'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.21/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' \
-    #             'rtspsrc location="rtsp://TapoCam:salut123@192.168.1.22/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp. ' # Livingroom 22
-
-    # video_cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
 
     # detection subprocess
     detection = mpc.Process(
@@ -182,40 +175,24 @@ def main():
 
     server = utils.Server(2, 8080)
     print("2 clients connected")
-
     server.send(-1, os.popen('ls -1 $(ls -d -1 house/*/*/)').read())
 
     print("Loading finished in {} secs".format(time.time() - start_time))
-
-
     print("Start while loop")
 
     while True:
 
         ## getting frames from cameras
+        print("Frames readed:", end='')
         frames_list = []
-
-        # ok, raw_frame = video_cam.read()
-        # cv2.imshow('0', raw_frame)
-        # cv2.waitKey(1)
-        
-        # raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGRA2BGR)
-        # frame["Bedroom1"] = raw_frame[0 * 720 : (0 + 1) * 720, :, :]
-        # frame["Livingroom"] = raw_frame[1 * 720 : (1 + 1) * 720, :, :]
-
         for k in cam.keys():
-
             ok, frame[k] = cam[k].read()
-
-            w, h = frame[k].shape[:2]
-            b, g, r = cv2.split(frame[k][w//2 - 50 : w//2 + 50, h//2 - 50 : h//2 + 50])
-            light_out[k] = not np.any(cv2.subtract(b, g) + cv2.subtract(g, r))
-
-            if ok == False:
-                frame[k] = cam[k].error_frame
-            else:
+            if ok:
                 frames_list.append(frame[k])
-
+                print(frame[k].shape, ", ", end='')
+            else:
+                frame[k] = cam[k].error_frame
+        print()
         ## adding frames to queue for processing
         if not frames_queue.full():
             frames_queue.put((frame_id, frames_list))

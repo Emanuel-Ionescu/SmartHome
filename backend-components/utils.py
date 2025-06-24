@@ -157,6 +157,8 @@ def __detect_and_process(model, frames_queue, results_queue):
     """Add in results queue a tuple of detected face and the generated mask
     """
 
+    print("DETECT SUBPROCESS: Started")
+
     def __process_frame(frame, id):
         face_info = model.find_faces(frame)
         if face_info is None:
@@ -191,6 +193,8 @@ def __detect_and_process(model, frames_queue, results_queue):
             time.sleep(0.1)
             continue
 
+        print("DETECT SUBPROCESS: Frames Readed")
+        
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
         results = []
 
@@ -224,6 +228,7 @@ def __detect_and_process(model, frames_queue, results_queue):
 
             results.append(res)
 
+        print("DETECT SUBPROCESS: Results Ready")
         if not results_queue.full():
             results_queue.put(results)
 
