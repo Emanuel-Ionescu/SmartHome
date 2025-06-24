@@ -210,7 +210,6 @@ def __detect_and_process(frames_queue : mpc.Queue, results_queue : mpc.Queue):
             continue
         
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
-        print("DETECT SUBPROCESS: Frames readed", frames[0].shape, frames[1].shape)
 
         results = []
 
@@ -243,7 +242,6 @@ def __detect_and_process(frames_queue : mpc.Queue, results_queue : mpc.Queue):
 
             results.append(res)
 
-        print("DETECT SUBPROCESS: Results Ready")
         if not results_queue.full():
             results_queue.put(results)
 
