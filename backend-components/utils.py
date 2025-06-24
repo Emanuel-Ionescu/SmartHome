@@ -196,11 +196,12 @@ def __detect_and_process(model, frames_queue, results_queue):
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
         results = []
         
-        print("DETECT SUBPROCESS: Frames Readed")
+        print("DETECT SUBPROCESS: Frames Readed", frame[:].shape)
 
         for frame in frames:
-
+        
             res = __process_frame(frame, frame_id)
+            print("DETECT SUBPROCESS: Initial res:", res)
             if res[0] is None:
                 h = frame.shape[0] # height
                 w = frame.shape[1] # width
