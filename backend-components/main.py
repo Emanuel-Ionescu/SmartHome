@@ -183,16 +183,14 @@ def main():
     while True:
 
         ## getting frames from cameras
-        print("Frames readed:", end='')
         frames_list = []
         for k in cam.keys():
             ok, frame[k] = cam[k].read()
             if ok:
                 frames_list.append(frame[k])
-                print(frame[k].shape, ", ", end='')
             else:
                 frame[k] = cam[k].error_frame
-        print()
+                
         ## adding frames to queue for processing
         if not frames_queue.full():
             frames_queue.put((frame_id, frames_list))
