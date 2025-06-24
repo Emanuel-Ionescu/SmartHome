@@ -10,6 +10,7 @@ import socket
 import queue
 import time
 import threading
+import multiprocessing as mpc
 
 from model import Model
 
@@ -154,7 +155,7 @@ def __add_user(username, frames_queue, mask_queue):
 
     save_face(username, masks)
     
-def __detect_and_process(frames_queue, results_queue): 
+def __detect_and_process(frames_queue : mpc.Queue, results_queue : mpc.Queue): 
     """
     Add in results queue a tuple of detected face and the generated mask
     """
@@ -174,7 +175,6 @@ def __detect_and_process(frames_queue, results_queue):
 
     def __process_frame(frame, id):
         face_info = model.find_faces(frame)
-        print(face_info)
 
         if face_info is None:       
             return (None, None, None)
@@ -204,11 +204,14 @@ def __detect_and_process(frames_queue, results_queue):
 
 
     while True:
+
         if frames_queue.empty():
             time.sleep(0.1)
             continue
         
         frame_id, frames = frames_queue.get() # list of frames, one for each camera 
+        print("DETECT SUBPROCESS: Frames readed", frames[0].shape, frames[1].shape)
+
         results = []
 
         for frame in frames:
