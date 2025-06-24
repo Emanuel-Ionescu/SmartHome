@@ -95,6 +95,7 @@ def load_faces():
 
 def save_face(username, masks):
     
+    os.mkdir("./users_data/" + username)
     file = open("./users_data/" + username + "/.face", 'w')
 
     for mask in masks:
@@ -149,6 +150,7 @@ def __add_user(username, frames_queue, mask_queue):
         ok = False
 
         if not mask_queue.empty():
+            print(f"ADDING USER: {int((iterations/128 * 100) * 100)/100}%")
             iterations += 1
             masks.append(mask_queue.get())
             ok = True

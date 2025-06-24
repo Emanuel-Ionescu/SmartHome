@@ -160,7 +160,7 @@ def main():
         args=(frames_queue, result_queue)
         )
     detection.start()
-    
+
 
     # automation 
     operations = {}
@@ -297,6 +297,7 @@ def main():
                             addUser.kill()
                             adding_user = False
                             USERS = load_faces()
+                            print("USER ADDED")
                             server.send(-1, "USER_ADDED")
 
                     # test similarity   
