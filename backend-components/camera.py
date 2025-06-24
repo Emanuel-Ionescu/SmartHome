@@ -66,12 +66,14 @@ class Tapo_Camera:
         self.MOVE_SENT = 5
         try:
             self.tapo      = Tapo(self.host, self.user, self.password)
-        except:
+        except Exception as e:
+            print(e)
             self.tapo = Tapo_Dummy()
+            print("Using dummy camera")
         self.led       = 0
 
         time.sleep(3) # wait for connection
-        # self.ok, self.frame = self.read()
+        self.ok, self.frame = self.read()
 
         self.command_queue = queue.Queue(1)
         self.commands_subprocess = threading.Thread(

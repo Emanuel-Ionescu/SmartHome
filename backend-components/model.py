@@ -123,7 +123,7 @@ class Model:
                 print()
 
             for i, e in zip(self.info[k]["output"], range(len(self.info[k]["output"]))):
-                print("Input: " + str(e + 1))
+                print("Output: " + str(e + 1))
                 for j in i.keys(): print(str(k) + " : " + str(i[j]))
                 print()
 
@@ -165,6 +165,7 @@ class Model:
         )[0]
 
         output = []
+        print(face_scores)
         for i in range(int(face_total)):
             if self.valid_face(face_boxes[i]) and face_scores[i] >= DEFAULT_DETECTION_ACCURACY:
                 output.append( (face_boxes[i], face_scores[i]) )
