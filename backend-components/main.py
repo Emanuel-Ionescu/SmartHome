@@ -278,7 +278,7 @@ def main():
                 
                 if res[0] is not None:   
 
-                    #server.send(-1, "FACE:{}:{}".format(key, res[0]))
+                    # server.send(-1, "FACE:{}:{}".format(key, res[0]))
                     print("FACE:{}".format(key))
 
                     ## send to auto light tread
@@ -322,11 +322,12 @@ def main():
 
                         room_user[key] = best_user
 
-                        server.send(-1, "DETECTED:{}:{}".format(key, best_user))
+                        # server.send(-1, "DETECTED:{}:{}".format(key, best_user))
                         print("DETECTED: {}:{} <-> \033[31m{}%\033[0m".format(
                                     key, best_user, int(max_sim * 100))
                                 )
                         
+                    server.send(-1, f"DETECTED:{key}:{res[0]}:{best_user}:{int(max_sim * 100)}")
                     
 if __name__ == "__main__":
     main()

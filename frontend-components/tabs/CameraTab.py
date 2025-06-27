@@ -18,7 +18,7 @@ class CameraThread(QThread):
         super().__init__(parent=p)
         self.width = w
         self.height = h
-        self.debug = False
+        self.debug = True
         self.data = []
         
         self.pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ! queue ! appsink sync=false ' \
@@ -42,21 +42,22 @@ class CameraThread(QThread):
             ok, frame = cam.read()
 
             if ok:
-
                 self.updateData.emit(1)
                 iterator = 0
                 rect = []
+                user = ''
+                percent = ''
                 place = ''
 
                 while iterator < len(self.data):
                     val = self.data[iterator]
-                    if val.split(':')[0] == "FACE":
+                    if val.split(':')[0] == "DETECTED":
                         
                         try:
-                            place, a = val.split(':')[1:]
+                            place, f, user, percent = val.split(':')[1:]
                         except:
                             print("!! val splitting failed; val= {}".format(val))
-                        rect = a[1:-1].split()
+                        rect = f[1:-1].split()
 
                         self.data.pop(iterator)
                         self.removeParentData.emit(iterator)
@@ -79,8 +80,12 @@ class CameraThread(QThread):
                         (int('53', 16), int('43', 16), int('f3', 16)),
                         -1
                         )
-                    self.frames[place] = cv2.addWeighted(overlay, alpha, self.frames[place], 1 - alpha, 0)
-
+                    overlay = cv2.addWeighted(overlay, alpha, self.frames[place], 1 - alpha, 0)
+                    overlay = cv2.putText(
+                        overlay, f"{user} {percent}%", 
+                        (int(float(rect[0]) * self.frames[place].shape[1]), int(float(rect[1]) * self.frames[place].shape[1])),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (int('53', 16), int('43', 16), int('f3', 16)), 2)
+                    self.frames[place] = overlay
 
                 try:
                     frame = self.frames[self.camera_streamed]

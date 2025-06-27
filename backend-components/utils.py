@@ -95,7 +95,8 @@ def load_faces():
 
 def save_face(username, masks):
     
-    os.mkdir("./users_data/" + username)
+    print("SAVING USER ...")
+    os.system("mkdir ./users_data/" + username)
     file = open("./users_data/" + username + "/.face", 'w')
 
     for mask in masks:
