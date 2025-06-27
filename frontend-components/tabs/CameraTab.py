@@ -75,15 +75,15 @@ class CameraThread(QThread):
                     alpha = 0.4
                     overlay = cv2.rectangle(
                         overlay, 
-                        (int(float(rect[0]) * self.frames[place].shape[1]), int(float(rect[1]) * self.frames[place].shape[1])),
-                        (int(float(rect[0]) * self.frames[place].shape[0]), int(float(rect[2]) * self.frames[place].shape[0])),
+                        (int(float(rect[1]) * self.frames[place].shape[1]), int(float(rect[0]) * self.frames[place].shape[0])),
+                        (int(float(rect[3]) * self.frames[place].shape[1]), int(float(rect[2]) * self.frames[place].shape[0])),
                         (int('53', 16), int('43', 16), int('f3', 16)),
                         -1
                         )
                     overlay = cv2.addWeighted(overlay, alpha, self.frames[place], 1 - alpha, 0)
                     overlay = cv2.putText(
                         overlay, f"{user} {percent}%", 
-                        (int(float(rect[0]) * self.frames[place].shape[1]), int(float(rect[1]) * self.frames[place].shape[1])),
+                        (int(float(rect[1]) * self.frames[place].shape[1]), int(float(rect[0]) * self.frames[place].shape[0])),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (int('53', 16), int('43', 16), int('f3', 16)), 2)
                     self.frames[place] = overlay
 
